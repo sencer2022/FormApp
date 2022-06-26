@@ -5,34 +5,46 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const repassword = document.getElementById('repassword');
 
+function error(input){
+    input.className = 'form-control is-invalid';
+};
+
+function success(input){
+   input.className = 'form-control is-valid';
+};
 
 
 form.addEventListener('submit', function(e){
     e.preventDefault();
-    //console.log(username.value);
-    //console.log(password.value);
-
     if(username.value ===''){
-        card.className ='card error1';
-        //username.className = 'form-control error1';
-        username.classList = 'form-control is-invalid';
+        error(username);
     }else {
-        username.className = 'form-control is-valid';
+        success(username);
     }
 
     if(email.value ===''){
-        card.className ='card error1';
-        email.className = 'form-control is-invalid';
+        error(email);
+    }else {
+        success(email);
     }
 
     if(password.value ===''){
-        card.className ='card error1';
-        password.className = 'form-control is-invalid';
+        error(password);
+    }else {
+        success(password);
     }
 
     if(repassword.value ===''){
-        card.className ='card error1';
-        repassword.className = 'form-control is-invalid';
+        error(repassword);
+    }else {
+        success(repassword);
     }
+
+    if(username.value ==='' || email.value ==='' || password.value ==='' || repassword.value ===''){
+        card.className = 'card error';
+    }else{
+        card.className = 'card success';
+    }
+
 });
 
