@@ -19,11 +19,14 @@ function success(input){
 function checkEmail(input) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
-    if(re.test(input.value)){
+    if(re.test(String(input.value).toLowerCase())){
         success(input);
     }else{
         error(email, 'Type the E-mail correctly please..');
     }
+
+    //return re.test(input.value);
+    return re.test(String(input.value).toLowerCase());
 };
 
 function checkRequirement(inputs){
@@ -42,5 +45,13 @@ form.addEventListener('submit', function(e){
     e.preventDefault();
     checkRequirement([username,email,password,repassword]);
     checkEmail(email);
+
+    if(username.value ==='' || email.value ==='' || password.value ==='' || repassword.value ===''){
+        card.className = 'card error';
+    }else if(!checkEmail(email)){
+        card.className = 'card error';
+    }else{
+        card.className = 'card success';
+    };
 });
 
