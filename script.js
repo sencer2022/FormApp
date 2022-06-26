@@ -2,6 +2,7 @@ const card = document.querySelector('.card');
 const form = document.getElementById('form');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
+const phone = document.getElementById('phone');
 const password = document.getElementById('password');
 const repassword = document.getElementById('repassword');
 
@@ -60,9 +61,17 @@ function checkPasswords(input1, input2){
     }
 };
 
+function checkPhone(input){
+    var exp =  /^\d{10}$/;
+    if(!exp.test(input.value)){
+        error(input,'Please 10 characters of number!');
+        card.className = 'card error';
+    }
+}
+
 form.addEventListener('submit', function(e){ 
     e.preventDefault();
-    checkRequirement([username,email,password,repassword]);
+    checkRequirement([username,email,phone,password,repassword]);
     checkEmail(email);
 
     if(username.value ==='' || email.value ==='' || password.value ==='' || repassword.value ===''){
@@ -77,5 +86,6 @@ form.addEventListener('submit', function(e){
     checkLength(password, 7, 12);
 
     checkPasswords(password, repassword);
+    checkPhone(phone);
 });
 
