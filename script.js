@@ -16,46 +16,31 @@ function success(input){
    input.className = 'form-control is-valid';
 };
 
-function validateEmail(email) {
+function checkEmail(input) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    
+    if(re.test(input.value)){
+        success(input);
+    }else{
+        error(email, 'Type the E-mail correctly please..');
+    }
 };
 
-form.addEventListener('submit', function(e){
+function checkRequirement(inputs){
+   
+    inputs.forEach(function(input){
+        if(input.value===''){
+            error(input,`Type the ${input.id} please..`);
+        }else{
+            success(input);
+        };
+    });
+
+};
+
+form.addEventListener('submit', function(e){ 
     e.preventDefault();
-    if(username.value ===''){
-        error(username, "Type username please..");
-    }else {
-        success(username);
-    }
-
-    if(email.value ===''){
-        error(email, "Type E-mail please..");
-    }else if(!validateEmail(email.value)){
-        error(email, "Type the E-mail correctly please.. ")
-    }else {
-        success(email);
-    }
-
-    if(password.value ===''){
-        error(password, "Type Password please..");
-    }else {
-        success(password);
-    }
-
-    if(repassword.value ===''){
-        error(repassword, "Type Repassword please..");
-    }else {
-        success(repassword);
-    }
-
-    if(username.value ==='' || email.value ==='' || password.value ==='' || repassword.value ===''){
-        card.className = 'card error';
-    }else if(!validateEmail(email.value)){
-        card.className = 'card error';
-    }else{
-        card.className = 'card success';
-    }
-
+    checkRequirement([username,email,password,repassword]);
+    checkEmail(email);
 });
 
