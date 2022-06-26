@@ -23,7 +23,6 @@ function checkEmail(input) {
         success(input);
     }else{
         error(email, 'Type the E-mail correctly please..');
-        //card.className = 'card error';
     }
 
     //return re.test(input.value);
@@ -35,7 +34,6 @@ function checkRequirement(inputs){
     inputs.forEach(function(input){
         if(input.value===''){
             error(input,`Type the ${input.id} please..`);
-            //card.className = 'card error';
         }else{
             success(input);
         };
@@ -53,7 +51,14 @@ function checkLength(input, min, max){
     }else{
         success(input)
     }
-}
+};
+
+function checkPasswords(input1, input2){
+    if(input1.value !== input2.value){
+        error(input2, 'Passwords are not same!');
+        card.className = 'card error';
+    }
+};
 
 form.addEventListener('submit', function(e){ 
     e.preventDefault();
@@ -69,5 +74,8 @@ form.addEventListener('submit', function(e){
     };
 
     checkLength(username, 7, 15);
+    checkLength(password, 7, 12);
+
+    checkPasswords(password, repassword);
 });
 
